@@ -6,8 +6,8 @@ import React from "react";
 
 const Home: NextPage = () => {
   const [aggregationLevel, setAggregationLevel] = React.useState<
-    "daily" | "weekly"
-  >("daily");
+    "today" | "week"
+  >("today");
   return (
     <PageContainer>
       <Box>
@@ -24,12 +24,25 @@ const Home: NextPage = () => {
           fontWeight="medium"
           mb=".3em"
         >
-          View Team Check-In Data:
+          View team check-ins from:
         </Heading>
         <AggregationLevelButtonGroup
           setAggregationLevel={setAggregationLevel}
           currentSelection={aggregationLevel}
         />
+      </Box>
+      <Box mt="2em">
+        <Heading
+          as="h2"
+          textAlign="left"
+          w="full"
+          fontSize="xl"
+          fontWeight="medium"
+          mb=".3em"
+        >
+          Team Check-in for{" "}
+          {aggregationLevel === "today" ? "Today" : "This Week"}
+        </Heading>
       </Box>
     </PageContainer>
   );

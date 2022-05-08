@@ -4,23 +4,23 @@ export const AggregationLevelButtonGroup = ({
   currentSelection,
   setAggregationLevel,
 }: {
-  currentSelection: "daily" | "weekly";
-  setAggregationLevel: (aggregationLevel: "daily" | "weekly") => void;
+  currentSelection: "today" | "week";
+  setAggregationLevel: (aggregationLevel: "today" | "week") => void;
 }) => {
   return (
     <ButtonGroup variant="outline" isAttached size="md" colorScheme="blue">
       <Button
-        onClick={() => setAggregationLevel("daily")}
+        onClick={() => setAggregationLevel("today")}
         mr="-px"
-        isDisabled={currentSelection === "daily"}
+        isDisabled={currentSelection === "today"}
       >
-        Daily
+        Today
       </Button>
       <Button
-        onClick={() => setAggregationLevel("weekly")}
-        isDisabled={currentSelection === "weekly"}
+        onClick={() => setAggregationLevel("week")}
+        isDisabled={currentSelection === "week"}
       >
-        Weekly
+        This Week
       </Button>
     </ButtonGroup>
   );
