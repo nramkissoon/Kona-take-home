@@ -1,4 +1,4 @@
-import { Center } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
 
@@ -13,9 +13,16 @@ export const PageContainer: React.FC<{ children?: React.ReactNode }> = (
         <link rel="icon" href="/kona_favicon.png" />
       </Head>
       <main>
-        <Center w={["sm", "xl", "3xl", "5xl", "6xl", "8xl"]} px="0" mx="auto">
+        <Box
+          w={["sm", "xl", "3xl", "5xl", "6xl", "8xl"]}
+          px="0"
+          mx="auto"
+          mt="3em"
+          display="flex"
+          flexDirection="column"
+        >
           {props.children}
-        </Center>
+        </Box>
       </main>
     </div>
   );
