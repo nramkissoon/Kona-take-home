@@ -1,13 +1,12 @@
-import { AggregationLevelButtonGroup } from "@/components/AggregationLevelButtonGroup";
+import { DateRangePicker } from "@/components/DateRangePicker";
 import { PageContainer } from "@/components/PageContainer";
 import { Box, Heading } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import React from "react";
+import { useState } from "react";
 
 const Home: NextPage = () => {
-  const [aggregationLevel, setAggregationLevel] = React.useState<
-    "today" | "week"
-  >("today");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   return (
     <PageContainer>
       <Box>
@@ -16,22 +15,14 @@ const Home: NextPage = () => {
         </Heading>
       </Box>
       <Box mt="1em">
-        <Heading
-          as="h2"
-          textAlign="left"
-          w="full"
-          fontSize="lg"
-          fontWeight="medium"
-          mb=".3em"
-        >
-          View team check-ins from:
-        </Heading>
-        <AggregationLevelButtonGroup
-          setAggregationLevel={setAggregationLevel}
-          currentSelection={aggregationLevel}
+        <DateRangePicker
+          setEndDate={setEndDate}
+          setStartDate={setStartDate}
+          startDate={startDate}
+          endDate={endDate}
         />
       </Box>
-      <Box mt="2em">
+      <Box mt="1em">
         <Heading
           as="h2"
           textAlign="left"
@@ -40,8 +31,7 @@ const Home: NextPage = () => {
           fontWeight="medium"
           mb=".3em"
         >
-          Team Check-in for{" "}
-          {aggregationLevel === "today" ? "Today" : "This Week"}
+          Check-in Summary
         </Heading>
       </Box>
     </PageContainer>
