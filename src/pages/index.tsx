@@ -1,5 +1,6 @@
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { PageContainer } from "@/components/PageContainer";
+import { useCheckIns } from "@/components/useCheckIns";
 import { Box, Heading } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useState } from "react";
@@ -7,6 +8,8 @@ import { useState } from "react";
 const Home: NextPage = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const { data, isError, isLoading } = useCheckIns(startDate, endDate);
+  console.log(data);
   return (
     <PageContainer>
       <Box>

@@ -27,7 +27,7 @@ const convertJsonDataToKonaCheckInObject = (
     } = checkIn;
     return {
       id: Id,
-      timestamp: Number(Timestamp),
+      timestamp: Number(Timestamp) * 1000,
       elaboration: Elaboration === "" ? undefined : Elaboration,
       emotion: Emotion === "" ? undefined : Emotion,
       meetingHours: MeetingHours === "null" ? null : MeetingHours,
@@ -44,8 +44,22 @@ const convertJsonDataToKonaCheckInObject = (
   });
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<CheckInApiResponse>
+) => {
   try {
+    const { startDate, endDate } = req.query;
+    if (
+      !startDate ||
+      !endDate ||
+      typeof startDate !== "string" ||
+      typeof endDate !== "string"
+    ) {
+      res.status(400);
+      return;
+    }
+
     const json = await csv().fromFile(
       path.join(getConfig().serverRuntimeConfig.PROJECT_ROOT, csvFilePath)
     );
@@ -59,7 +73,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       checkIn.privateElaboration = null;
     });
 
-    res.json(checkIns);
+    // organize checkIns by slackTeamId and filter by startDate and endDate
+    const checkInsByTeam: { [slackTeamId: string]: KonaCheckIn[] } = {};
+    checkIns.forEach((checkIn) => {
+      if (
+        checkIn.timestamp >= Number(startDate) &&
+        checkIn.timestamp <= Number(endDate)
+      ) {
+        if (!checkInsByTeam[checkIn.slackTeamId]) {
+          checkInsByTeam[checkIn.slackTeamId] = [checkIn];
+        } else {
+          checkInsByTeam[checkIn.slackTeamId]?.push(checkIn);
+        }
+      }
+    });
+
+    res.json({
+      startDate: startDate,
+      endDate: endDate,
+      data: checkInsByTeam,
+    });
     res.status(200);
   } catch (e) {
     console.error(e);

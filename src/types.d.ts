@@ -31,3 +31,11 @@ interface KonaCheckInCsvJsonFormat {
   SlackOrgId: string;
   SlackTeamId: string;
 }
+
+interface CheckInApiResponse {
+  startDate: string;
+  endDate: string;
+  data: {
+    [slackTeamId: string]: KonaCheckIn[];
+  };
+}
