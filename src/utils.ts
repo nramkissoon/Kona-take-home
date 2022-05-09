@@ -28,11 +28,15 @@ export const getTeamSummariesFromCheckInApiResponse = (
           totalGreens++;
         }
       });
-      const redRatio = Number((totalReds / checkIns.length).toPrecision(2));
-      const yellowRatio = Number(
-        (totalYellows / checkIns.length).toPrecision(2)
+      const redRatio = Number.parseFloat(
+        (totalReds / checkIns.length).toPrecision(3)
       );
-      const greenRatio = 1 - redRatio - yellowRatio;
+      const yellowRatio = Number.parseFloat(
+        (totalYellows / checkIns.length).toPrecision(3)
+      );
+      const greenRatio = Number.parseFloat(
+        (totalGreens / checkIns.length).toPrecision(3)
+      );
       teamSummaries.push({
         slackTeamId,
         managerId,

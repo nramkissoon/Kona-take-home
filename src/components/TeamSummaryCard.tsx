@@ -22,17 +22,21 @@ export const TeamSummaryCard = ({
         </Box>
         <Box bg="kona.green" rounded="md" color="white" px="5px">
           Green:{" "}
-          <chakra.span fontWeight="medium">{ryg.greenRatio * 100}%</chakra.span>
+          <chakra.span fontWeight="medium">
+            {(ryg.greenRatio * 100).toFixed(1)}%
+          </chakra.span>
         </Box>
         <Box bg="kona.yellow" rounded="md" color="white" px="5px">
           Yellow:{" "}
           <chakra.span fontWeight="medium">
-            {ryg.yellowRatio * 100}%
+            {(ryg.yellowRatio * 100).toFixed(1)}%
           </chakra.span>
         </Box>
         <Box bg="kona.red" rounded="md" color="white" px="5px">
           Red:{" "}
-          <chakra.span fontWeight="medium">{ryg.redRatio * 100}%</chakra.span>
+          <chakra.span fontWeight="medium">
+            {(ryg.redRatio * 100).toFixed(1)}%
+          </chakra.span>
         </Box>
       </Flex>
     </Box>

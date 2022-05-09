@@ -20,6 +20,7 @@ export const PageContainer: React.FC<{ children?: React.ReactNode }> = (
           mt="3em"
           display="flex"
           flexDirection="column"
+          h="100vh"
         >
           {props.children}
         </Box>

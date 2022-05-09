@@ -1,6 +1,7 @@
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { PageContainer } from "@/components/PageContainer";
 import { TeamSummaryCard } from "@/components/TeamSummaryCard";
+import { TeamSummaryTable } from "@/components/TeamSummaryTable";
 import { useCheckIns } from "@/components/useCheckIns";
 import {
   getLeastGreenTeam,
@@ -44,17 +45,14 @@ const Home: NextPage = () => {
         </Heading>
         {data && Object.keys(data.data).length > 0 && (
           <Box>
-            <Flex
-              justifyContent="space-between"
-              flexDir={["column", null, null, null, "row"]}
-            >
-              <Box w="fit" minW="lg">
+            <Flex flexDir={["column", null, null, null, "row"]}>
+              <Box w="fit" minW="550px">
                 <Text fontWeight="medium" fontSize="lg">
                   This team is the most green :)
                 </Text>
                 <TeamSummaryCard {...getMostGreenTeam(summaries)} />
               </Box>
-              <Box w="fit" minW="lg">
+              <Box w="fit" minW="550px" ml={[0, null, null, null, "50px"]}>
                 <Text fontWeight="medium" fontSize="lg">
                   This team is the least green, try reaching out to the manager!
                 </Text>
@@ -63,7 +61,11 @@ const Home: NextPage = () => {
             </Flex>
           </Box>
         )}
-        {data && Object.keys(data.data).length > 0 && <Box></Box>}
+        {data && Object.keys(data.data).length > 0 && (
+          <Box>
+            <TeamSummaryTable summaries={summaries} />
+          </Box>
+        )}
       </Box>
     </PageContainer>
   );
