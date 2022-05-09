@@ -44,14 +44,17 @@ const Home: NextPage = () => {
         </Heading>
         {data && Object.keys(data.data).length > 0 && (
           <Box>
-            <Flex justifyContent="space-between">
-              <Box w="45%">
+            <Flex
+              justifyContent="space-between"
+              flexDir={["column", null, null, null, "row"]}
+            >
+              <Box w="fit" minW="lg">
                 <Text fontWeight="medium" fontSize="lg">
                   This team is the most green :)
                 </Text>
                 <TeamSummaryCard {...getMostGreenTeam(summaries)} />
               </Box>
-              <Box w="45%">
+              <Box w="fit" minW="lg">
                 <Text fontWeight="medium" fontSize="lg">
                   This team is the least green, try reaching out to the manager!
                 </Text>

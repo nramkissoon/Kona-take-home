@@ -46,7 +46,11 @@ export const DateRangePicker = ({
       </Flex>
       <Button
         size="sm"
-        colorScheme="blue"
+        bg="kona.green"
+        color="white"
+        _hover={{
+          bg: "kona.dark-green",
+        }}
         onClick={() => {
           const date = new Date();
           setStartDate(date);

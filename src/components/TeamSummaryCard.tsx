@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, chakra, Flex } from "@chakra-ui/react";
 
 export const TeamSummaryCard = ({
   ryg,
@@ -8,14 +8,32 @@ export const TeamSummaryCard = ({
   slackTeamId,
 }: TeamCheckInSummary) => {
   return (
-    <Box bg="gray.100" p="15px" rounded="md" shadow="sm" fontSize="lg">
-      <Text>Team: {slackTeamId}</Text>
-      <Text>Manager: {managerId}</Text>
-      <Flex justifyContent="space-between">
-        <Box>Total Check-ins: {totalCheckIns}</Box>
-        <Box>Green: {ryg.greenRatio * 100}%</Box>
-        <Box>Red: {ryg.redRatio * 100}%</Box>
-        <Box>Yellow: {ryg.yellowRatio * 100}%</Box>
+    <Box bg="kona.beige" p="15px" rounded="md" shadow="sm" fontSize="lg">
+      <Box>
+        Team: <chakra.span fontWeight="medium">{slackTeamId}</chakra.span>
+      </Box>
+      <Box>
+        Manager: <chakra.span fontWeight="medium">{managerId}</chakra.span>
+      </Box>
+      <Flex justifyContent="space-between" mt="1em">
+        <Box bg="kona.dark-gray" rounded="md" color="white" px="5px">
+          Total Check-ins:{" "}
+          <chakra.span fontWeight="medium">{totalCheckIns}</chakra.span>
+        </Box>
+        <Box bg="kona.green" rounded="md" color="white" px="5px">
+          Green:{" "}
+          <chakra.span fontWeight="medium">{ryg.greenRatio * 100}%</chakra.span>
+        </Box>
+        <Box bg="kona.yellow" rounded="md" color="white" px="5px">
+          Yellow:{" "}
+          <chakra.span fontWeight="medium">
+            {ryg.yellowRatio * 100}%
+          </chakra.span>
+        </Box>
+        <Box bg="kona.red" rounded="md" color="white" px="5px">
+          Red:{" "}
+          <chakra.span fontWeight="medium">{ryg.redRatio * 100}%</chakra.span>
+        </Box>
       </Flex>
     </Box>
   );
