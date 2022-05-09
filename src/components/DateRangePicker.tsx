@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -44,6 +44,17 @@ export const DateRangePicker = ({
           onChange={(date: Date) => setEndDate(date)}
         />
       </Flex>
+      <Button
+        size="sm"
+        colorScheme="blue"
+        onClick={() => {
+          const date = new Date();
+          setStartDate(date);
+          setEndDate(date);
+        }}
+      >
+        Set to today
+      </Button>
       {endDate < startDate && (
         <Box color="red.500" fontWeight="medium">
           End date must be after start date!

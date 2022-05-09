@@ -89,8 +89,8 @@ const handler = async (
     });
 
     res.json({
-      startDate: startDate,
-      endDate: endDate,
+      startTimestamp: Number(startDate),
+      endTimestamp: Number(endDate),
       data: checkInsByTeam,
     });
     res.status(200);

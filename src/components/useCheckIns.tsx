@@ -12,7 +12,7 @@ export const useCheckIns = (startDate: Date, endDate: Date) => {
   const { data, error, mutate } = useSWR([startDate, endDate], fetcher);
 
   return {
-    data: data,
+    data: data as CheckInApiResponse,
     isLoading: !error && !data,
     isError: error,
     mutate: mutate,

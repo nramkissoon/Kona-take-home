@@ -33,9 +33,26 @@ interface KonaCheckInCsvJsonFormat {
 }
 
 interface CheckInApiResponse {
-  startDate: string;
-  endDate: string;
+  startTimestamp: number;
+  endTimestamp: number;
   data: {
     [slackTeamId: string]: KonaCheckIn[];
+  };
+}
+
+interface TeamCheckInSummary {
+  slackTeamId: string;
+  managerId: string;
+  teamId: string;
+  startTimestamp: number;
+  endTimestamp: number;
+  totalCheckIns: number;
+  ryg: {
+    totalReds: number;
+    totalYellows: number;
+    totalGreens: number;
+    redRatio: number;
+    yellowRatio: number;
+    greenRatio: number;
   };
 }
