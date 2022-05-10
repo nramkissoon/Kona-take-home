@@ -14,7 +14,7 @@ export const PageContainer: React.FC<{ children?: React.ReactNode }> = (
       </Head>
       <main>
         <Box
-          w={["sm", "xl", "3xl", "5xl", "6xl", "8xl"]}
+          w={["sm", "xl", "3xl", "5xl", "6xl"]}
           px="0"
           mx="auto"
           mt="3em"

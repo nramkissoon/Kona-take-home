@@ -29,6 +29,7 @@ import {
 } from "react-table";
 import { v4 as uuidv4 } from "uuid";
 
+// Data needed for each row in the table
 type TeamSummaryTableRowProps = Pick<
   TeamCheckInSummary,
   "slackTeamId" | "managerId" | "totalCheckIns"
@@ -39,6 +40,7 @@ type TeamSummaryTableRowProps = Pick<
   filterString: string;
 };
 
+// Input component for filtering rows based on user input
 const GlobalFilter = (props: {
   globalFilter: any;
   setGlobalFilter: (filterValue: any) => void;
@@ -90,8 +92,8 @@ interface TableSortColumnUiProps {
 }
 
 /**
- * If true, the column is sorted descending
-    If false, the column is sorted ascending
+ * If true, the column is sorted ascending.
+    If false, the column is sorted descending
     If undefined, the column is not currently being sorted
  */
 const sortedAsc = (b: boolean | undefined) => {
@@ -100,16 +102,15 @@ const sortedAsc = (b: boolean | undefined) => {
   return true;
 };
 
+// Component for sorting rows by ascending or descending
 export const TableSortColumnUi = (props: TableSortColumnUiProps) => {
   const { column, toggleSortBy } = props;
-  const selectedColor = "kona.green";
   return (
     <Flex>
       <IconButton
         mr=".5em"
         size="sm"
-        colorScheme="gray"
-        background={column.isSortedDesc ? selectedColor : ""}
+        background={column.isSortedDesc ? "kona.green" : ""}
         aria-label="sort descending"
         icon={<TriangleDownIcon />}
         onClick={() => {
@@ -117,17 +118,22 @@ export const TableSortColumnUi = (props: TableSortColumnUiProps) => {
             ? column.clearSortBy()
             : toggleSortBy(column.id, true, false);
         }}
+        _hover={{
+          background: "kona.green",
+        }}
       />
       <IconButton
         size="sm"
-        colorScheme="gray"
-        background={sortedAsc(column.isSortedDesc) ? selectedColor : ""}
+        background={sortedAsc(column.isSortedDesc) ? "kona.green" : ""}
         aria-label="sort ascending"
         icon={<TriangleUpIcon />}
         onClick={() => {
           sortedAsc(column.isSortedDesc)
             ? column.clearSortBy()
             : toggleSortBy(column.id, false, false);
+        }}
+        _hover={{
+          background: "kona.green",
         }}
       />
     </Flex>
@@ -156,6 +162,7 @@ export const TeamSummaryTable = ({
 }: {
   summaries: TeamCheckInSummary[];
 }) => {
+  // summaries -> row props
   const data: TeamSummaryTableRowProps[] = React.useMemo(() => {
     return summaries.map((summary) => ({
       slackTeamId: summary.slackTeamId,
@@ -168,6 +175,7 @@ export const TeamSummaryTable = ({
     }));
   }, [summaries]);
 
+  // defines columns in the table and how they are displayed
   const columns = React.useMemo(
     (): Column<TeamSummaryTableRowProps>[] => [
       {
@@ -238,18 +246,14 @@ export const TeamSummaryTable = ({
     headerGroups,
     prepareRow,
     page,
-    gotoPage,
     setGlobalFilter,
-    globalFilteredRows,
     toggleSortBy,
-    state: { pageIndex, pageSize, globalFilter },
+    state: { globalFilter },
   } = useTable<TeamSummaryTableRowProps>(
     {
       columns: columns,
       data: data ? data : [],
       autoResetSortBy: false,
-      autoResetPage: false,
-      initialState: { pageIndex: 0, pageSize: 15 },
     },
     useGlobalFilter,
     useSortBy,
